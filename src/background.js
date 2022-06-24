@@ -2,13 +2,13 @@
 chrome.tabs.onActivated.addListener((activeInfo) => {
   chrome.tabs.get(activeInfo.tabId, (tab) => {
     if (tab.url) {
-      setIconAndPopup();
+      chrome.action.setPopup({
+        popup: "src/popup.html",
+      });
+    } else {
+      chrome.action.setPopup({
+        popup: "src/popup-disabled.html",
+      });
     }
   });
 });
-
-function setIconAndPopup(tabId) {
-  chrome.action.setPopup({
-    popup: "src/popup.html",
-  });
-}
