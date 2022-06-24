@@ -32,10 +32,11 @@ resetButton.addEventListener("click", async () => {
 function saveData() {
   try {
     const data = window.localStorage.getItem("persist:timetables");
-    if (data) {
+    if (!data) {
       throw new Error("Timetable data could not be found.");
     }
-    chrome.storage.sync.set({ "nusmods-timetables": data });
+    chrome.storage.sync.set({ nusmods_timetables: data });
+    console.log("Successfully saved data.");
   } catch (error) {
     console.log(error.message);
   }
@@ -43,9 +44,14 @@ function saveData() {
 
 function loadData() {
   try {
-    chrome.storage.sync.get(["nusmods-timetables"], (result) =>
-      window.localStorage.setItem("persist:timetables", result)
+    chrome.storage.sync.get(["nusmods_timetables"], (result) =>
+      window.localStorage.setItem(
+        "persist:timetables",
+        result.nusmods_timetables
+      )
     );
+    window.location.reload();
+    console.log("Successfully loaded data.");
   } catch (error) {
     console.log(error.message);
   }
@@ -53,7 +59,7 @@ function loadData() {
 
 function resetData() {
   try {
-    window.localStorage.removeItem("persist:timetables");
+    window.localStorage.clear();
     window.location.reload();
   } catch (error) {
     console.log(error.message);
