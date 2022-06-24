@@ -3,28 +3,46 @@ let loadButton = document.getElementById("loadButton");
 let resetButton = document.getElementById("resetButton");
 
 saveButton.addEventListener("click", async () => {
+  disableButtons();
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   chrome.scripting.executeScript({
     target: { tabId: tab.id },
     function: saveData,
   });
+  enableButtons();
 });
 
 loadButton.addEventListener("click", async () => {
+  disableButtons();
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   chrome.scripting.executeScript({
     target: { tabId: tab.id },
     function: loadData,
   });
+  enableButtons();
 });
 
 resetButton.addEventListener("click", async () => {
+  disableButtons();
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   chrome.scripting.executeScript({
     target: { tabId: tab.id },
     function: resetData,
   });
+  enableButtons();
 });
+
+function disableButtons() {
+  saveButton.setAttribute("disabled", true);
+  loadButton.setAttribute("disabled", true);
+  resetButton.setAttribute("disabled", true);
+}
+
+function enableButtons() {
+  saveButton.removeAttribute("disabled");
+  loadButton.removeAttribute("disabled");
+  resetButton.removeAttribute("disabled");
+}
 
 // API for storing and accessing data from user google
 // account that is synced with their chrome browser.
