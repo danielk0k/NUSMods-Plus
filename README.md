@@ -8,10 +8,9 @@ A Chrome extension for saving session data on <https://nusmods.com/>. Take your 
 
 1. Ensure that you are signed in to your Chrome browser and have enable sync.
    <img alt="Chrome sync account enabled" src="/screenshots/shot1.png" width="70%" height="70%">
-
 2. Download the zip file [here](https://github.com/danielk0k/NUSMods-Plus/archive/refs/heads/main.zip)
 3. Unzip the file
-4. Navigate to <a href="chrome://extensions/">chrome://extensions/</a>
+4. Navigate to your extensions under settings and switch to developer mode
 5. Click on "Load unpacked" and select the unzipped folder
 6. Pin the extension to your toolbar for easy access
 
