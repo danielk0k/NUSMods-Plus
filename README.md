@@ -8,9 +8,11 @@ The extension is currently under development and maybe buggy at times. But if yo
 ## User Guide
 
 1. Ensure that you are signed in to your Chrome browser and have enable sync.
+![Chrome sync account enabled](/screenshots/shot1.png "Chrome sync")
 2. Download the zip file [here](https://github.com/danielk0k/NUSMods-Plus/archive/refs/heads/main.zip)
+![Download zip file](/screenshots/shot2.png "Download zip file")
 3. Unzip the file
-4. Navigate to <chrome://extensions/>
+4. Navigate to <a href="chrome://extensions/">chrome://extensions/</a>
 5. Click on "Load unpacked" and select the unzipped folder
 6. Pin the extension to your toolbar for easy access
 
