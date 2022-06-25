@@ -1,0 +1,18 @@
+body {
+  min-width: 300px;
+  min-height: 100px;
+}
+
+#saveButton,
+#loadButton,
+#resetButton {
+  margin-top: 1rem;
+}
+
+#saveButton {
+  margin-top: 2rem;
+}
+
+#resetButton {
+  margin-bottom: 2rem;
+}
