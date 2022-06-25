@@ -2,13 +2,13 @@
 
 A Chrome extension for saving session data on <https://nusmods.com/>. Take your module timetable that you spent so long optimising with you on any Chrome browser. Simple save and load the session data which will be synced with your Google account.
 
-**Notice**
-The extension is currently under development and maybe buggy at times. But if you like the idea and want to contribute, do hit me up!
+**Notice**: The extension is currently under development and maybe buggy at times. But if you like the idea and want to contribute, do hit me up!
 
 ## User Guide
 
 1. Ensure that you are signed in to your Chrome browser and have enable sync.
-<img alt="Chrome sync account enabled" src="/screenshots/shot1.png" width="70%" height="70%">
+   <img alt="Chrome sync account enabled" src="/screenshots/shot1.png" width="70%" height="70%">
+
 2. Download the zip file [here](https://github.com/danielk0k/NUSMods-Plus/archive/refs/heads/main.zip)
 3. Unzip the file
 4. Navigate to <a href="chrome://extensions/">chrome://extensions/</a>
