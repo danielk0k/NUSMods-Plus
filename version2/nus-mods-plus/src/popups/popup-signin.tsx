@@ -27,12 +27,21 @@ function SigninPopup() {
 
   return (
     <form onSubmit={handleAccount}>
-      <label>NUSNET ID: </label>
-      <input
-        type="text"
-        onChange={(event) => setNusId(event.target.value)}
-      ></input>
-      <button type="submit">Submit</button>
+      <div className="form-group">
+        <label htmlFor="nusnetId">NUSNET ID</label>
+        <input
+          type="text"
+          className="form-control"
+          id="nusnetId"
+          onChange={(event) => setNusId(event.target.value)}
+        />
+        <small id="nusnetHelp" className="form-text text-muted">
+          You'll not receive any email from us.
+        </small>
+      </div>
+      <button type="submit" className="btn btn-primary btn-block">
+        Submit
+      </button>
     </form>
   );
 }

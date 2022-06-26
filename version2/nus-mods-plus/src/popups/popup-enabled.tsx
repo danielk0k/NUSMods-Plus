@@ -103,9 +103,33 @@ function EnabledPopup() {
 
   return (
     <div>
-      <button onClick={handleSave}>Save</button>
-      <button onClick={handleLoad}>Load</button>
-      <button onClick={handleReset}>Nuke</button>
+      <button
+        id="saveButton"
+        type="button"
+        className="btn btn-default btn-block"
+        title="Save session data"
+        onClick={handleSave}
+      >
+        Save
+      </button>
+      <button
+        id="loadButton"
+        type="button"
+        className="btn btn-default btn-block"
+        title="Load session data"
+        onClick={handleLoad}
+      >
+        Load
+      </button>
+      <button
+        id="resetButton"
+        type="button"
+        className="btn btn-danger btn-block"
+        title="Reset session data"
+        onClick={handleReset}
+      >
+        Nuke
+      </button>
     </div>
   );
 }

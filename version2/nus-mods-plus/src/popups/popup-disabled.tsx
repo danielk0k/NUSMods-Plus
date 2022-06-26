@@ -25,7 +25,7 @@ function DisabledPopup() {
     <>
       <button onClick={handleSignOut}>Sign Out</button>
       {isDisabled ? (
-        <p>
+        <p className="lead">
           NUSMods Plus works only on
           <a href="https://nusmods.com/" target="_blank">
             nusmods.com
