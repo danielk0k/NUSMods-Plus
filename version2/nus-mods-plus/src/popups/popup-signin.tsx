@@ -13,8 +13,8 @@ function SigninPopup() {
 
       if (!user || SignInError) {
         const { error: SignUpError } = await supabase.auth.signUp({
-          email: `${nusId.toUpperCase()}@u.nus.edu`,
-          password: `${nusId.toUpperCase()}`,
+          email: `${nusId.toLowerCase()}@u.nus.edu`,
+          password: `${nusId.toLowerCase()}`,
         });
         if (SignUpError) {
           throw new Error("Something went wrong here");

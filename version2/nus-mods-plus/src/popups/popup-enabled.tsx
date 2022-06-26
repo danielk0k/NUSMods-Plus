@@ -1,55 +1,111 @@
 import { useState } from "react";
-import { saveData, loadData, resetData } from "../api";
+import { getData, setData, resetData } from "../api";
+import { supabase } from "../supabaseClient";
 
 function EnabledPopup() {
-  const [isDisabled, setIsDisabled] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const user = supabase.auth.user();
+
   const handleSave = async () => {
-    setIsDisabled(true);
-    const [tab] = await chrome.tabs.query({
-      active: true,
-      currentWindow: true,
-    });
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      func: saveData,
-    });
-    setIsDisabled(false);
+    try {
+      setLoading(true);
+      let [tab] = await chrome.tabs.query({
+        active: true,
+        currentWindow: true,
+      });
+
+      chrome.scripting.executeScript(
+        {
+          target: { tabId: tab.id },
+          world: "MAIN",
+          func: getData,
+        },
+        async (injectionResults) => {
+          for (const frameResult of injectionResults) {
+            if (!frameResult.result) {
+              throw new Error("No timetable data was found.");
+            } else {
+              const updates = {
+                id: user.id,
+                timetable_data: frameResult.result,
+                updated_at: new Date(),
+              };
+
+              const { error } = await supabase
+                .from("nusmods")
+                .upsert(updates, { returning: "minimal" });
+
+              if (error) {
+                throw error;
+              }
+            }
+          }
+        }
+      );
+      console.log("Saved ok.");
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
+
   const handleLoad = async () => {
-    setIsDisabled(true);
-    const [tab] = await chrome.tabs.query({
-      active: true,
-      currentWindow: true,
-    });
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      func: loadData,
-    });
-    setIsDisabled(false);
+    try {
+      setLoading(true);
+      const { data, error, status } = await supabase
+        .from("nusmods")
+        .select("timetable_data")
+        .single();
+
+      if (error && status !== 406) {
+        throw error;
+      }
+
+      let [tab] = await chrome.tabs.query({
+        active: true,
+        currentWindow: true,
+      });
+
+      chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        world: "MAIN",
+        func: setData,
+        args: [data.timetable_data],
+      });
+      console.log("Loaded ok");
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
+
   const handleReset = async () => {
-    setIsDisabled(true);
-    const [tab] = await chrome.tabs.query({
-      active: true,
-      currentWindow: true,
-    });
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      func: resetData,
-    });
-    setIsDisabled(false);
+    try {
+      setLoading(true);
+      let [tab] = await chrome.tabs.query({
+        active: true,
+        currentWindow: true,
+      });
+
+      chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        world: "MAIN",
+        func: resetData,
+      });
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
+
   return (
     <div>
-      <button onClick={handleSave} disabled={isDisabled}>
-        Save
-      </button>
-      <button onClick={handleLoad} disabled={isDisabled}>
-        Load
-      </button>
-      <button onClick={handleReset} disabled={isDisabled}>
-        Nuke
-      </button>
+      <button onClick={handleSave}>Save</button>
+      <button onClick={handleLoad}>Load</button>
+      <button onClick={handleReset}>Nuke</button>
     </div>
   );
 }
