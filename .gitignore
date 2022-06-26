@@ -24,11 +24,9 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-
 # local env files
 
 out/
-build/
 dist/
 
 # plasmo - https://www.plasmo.com
