@@ -1,0 +1,26 @@
+.container {
+  text-align: center;
+}
+
+img {
+  width: 15%;
+  height: 15%;
+  opacity: 50%;
+  transition-duration: 0.5s;
+}
+
+img:hover {
+  opacity: 100%;
+}
+
+.row:last-child {
+  display: block;
+  margin: auto;
+  width: 40%;
+  margin-top: 50px;
+}
+
+.row:last-child p {
+  margin-top: 15px;
+  color: rgb(115, 115, 115);
+}
