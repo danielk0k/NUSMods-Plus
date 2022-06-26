@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { supabase } from "../supabaseClient";
 import EnabledPopup from "./popup-enabled";
 
 function DisabledPopup() {
@@ -11,22 +10,12 @@ function DisabledPopup() {
       setIsDisabled(true);
     }
   });
-  const handleSignOut = async () => {
-    try {
-      const { error } = await supabase.auth.signOut();
-      if (error) {
-        throw error;
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+
   return (
-    <>
-      <button onClick={handleSignOut}>Sign Out</button>
+    <div>
       {isDisabled ? (
         <p className="lead">
-          NUSMods Plus works only on
+          NUSMods Plus works only on{" "}
           <a href="https://nusmods.com/" target="_blank">
             nusmods.com
           </a>
@@ -34,7 +23,7 @@ function DisabledPopup() {
       ) : (
         <EnabledPopup />
       )}
-    </>
+    </div>
   );
 }
 

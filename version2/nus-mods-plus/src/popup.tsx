@@ -7,14 +7,14 @@ function IndexPopup() {
   return (
     <div
       className="container"
-      style={{ minWidth: "300px", minHeight: "100px", padding: "10px" }}
+      style={{ minWidth: "300px", minHeight: "100px", padding: "15px" }}
     >
       <div className="mx-auto">
-        <h4>
+        <h3 style={{ marginTop: "0px" }}>
           NUSMods Plus
           <br />
           <small>An extension for saving session data</small>
-        </h4>
+        </h3>
       </div>
       <div className="mx-auto">
         {session ? <DisabledPopup /> : <SigninPopup />}

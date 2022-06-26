@@ -108,6 +108,7 @@ function EnabledPopup() {
         type="button"
         className="btn btn-default btn-block"
         title="Save session data"
+        disabled={loading}
         onClick={handleSave}
       >
         Save
@@ -115,8 +116,9 @@ function EnabledPopup() {
       <button
         id="loadButton"
         type="button"
-        className="btn btn-default btn-block"
+        className="btn btn-primary btn-block"
         title="Load session data"
+        disabled={loading}
         onClick={handleLoad}
       >
         Load
@@ -126,6 +128,7 @@ function EnabledPopup() {
         type="button"
         className="btn btn-danger btn-block"
         title="Reset session data"
+        disabled={loading}
         onClick={handleReset}
       >
         Nuke
